@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1qjr4b4dtu7l"]
+
+[ext_resource type="Script" uid="uid://cy14kb565s2mw" path="res://scripts/node_2d.gd" id="1_ufutv"]
+[ext_resource type="Texture2D" uid="uid://0cfdlwvymw41" path="res://asset/sprites/Brown.png" id="2_ufutv"]
+[ext_resource type="Texture2D" uid="uid://dg4qep6qxtbpn" path="res://asset/sprites/01.png" id="3_1lftm"]
+[ext_resource type="Texture2D" uid="uid://bvx43aw2mg174" path="res://asset/sprites/cooltext499741672903714.png" id="3_4l0v3"]
+[ext_resource type="Texture2D" uid="uid://clnb1br5jouwx" path="res://asset/sprites/02.png" id="4_tt2v1"]
+[ext_resource type="Texture2D" uid="uid://clakci6474frj" path="res://asset/sprites/03.png" id="5_atihp"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ufutv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1544.0
+offset_top = -670.0
+offset_right = 2768.0
+offset_bottom = 1625.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ufutv")
+stretch_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -272.0
+offset_top = -355.5
+offset_right = 897.0
+offset_bottom = -24.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4l0v3")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 223.0
+offset_top = 563.0
+offset_right = 632.0
+offset_bottom = 917.0
+icon = ExtResource("3_1lftm")
+flat = true
+expand_icon = true
+
+[node name="Button2" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 741.0
+offset_top = 566.0
+offset_right = 1133.0
+offset_bottom = 907.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("4_tt2v1")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button3" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1118.0
+offset_top = 557.0
+offset_right = 1689.0
+offset_bottom = 907.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("5_atihp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]

@@ -1,0 +1,116 @@
+[gd_scene load_steps=15 format=3 uid="uid://d31s20glbnonq"]
+
+[ext_resource type="Script" uid="uid://3m1vn2kkfuyf" path="res://scripts/spiketrap.gd" id="1_i3sks"]
+[ext_resource type="Texture2D" uid="uid://dts5vqm6g5vhh" path="res://asset/sprites/On (38x38).png" id="2_6gjsx"]
+[ext_resource type="PackedScene" uid="uid://d8o14k2ddc7g" path="res://scene/kill_zone.tscn" id="3_8l27q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kpd3"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(0, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xn0p5"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(38, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5afa"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(76, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldsl5"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(114, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v60p1"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(152, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lne5"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(190, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_myjsr"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(228, 0, 38, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1p2y7"]
+atlas = ExtResource("2_6gjsx")
+region = Rect2(266, 0, 38, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tsc2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kpd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xn0p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5afa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldsl5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v60p1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lne5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myjsr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1p2y7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v013t"]
+radius = 12.0415945
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjjk1"]
+size = Vector2(52, 12)
+
+[node name="spiketrap" type="Node2D"]
+script = ExtResource("1_i3sks")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
+position = Vector2(-1, -1)
+scale = Vector2(0.6315789, 0.631579)
+sprite_frames = SubResource("SpriteFrames_tsc2o")
+autoplay = "default"
+frame = 7
+frame_progress = 0.70093083
+
+[node name="killZone" parent="Area2D/AnimatedSprite2D" instance=ExtResource("3_8l27q")]
+position = Vector2(1.5833334, 1.5833333)
+scale = Vector2(1.5833334, 1.5833333)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/AnimatedSprite2D/killZone"]
+shape = SubResource("CircleShape2D_v013t")
+
+[node name="triggerarea" type="Area2D" parent="Area2D"]
+position = Vector2(-12, -3)
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/triggerarea"]
+position = Vector2(9, -6)
+shape = SubResource("RectangleShape2D_fjjk1")
+
+[node name="spiketimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="retracttimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_shape_entered" from="Area2D/AnimatedSprite2D/killZone" to="." method="_on_kill_zone_body_shape_entered"]
+[connection signal="body_entered" from="Area2D/triggerarea" to="." method="_on_triggerarea_body_entered"]
+[connection signal="timeout" from="spiketimer" to="." method="_on_spiketimer_timeout"]
+[connection signal="timeout" from="retracttimer" to="." method="_on_retracttimer_timeout"]
